@@ -156,7 +156,9 @@ def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
     def predicted_output(*latent_space):
         print("Latent Space: ", [f"{i:.2f}" for i in latent_space])
         result_data = np.dot(latent_space, model.components_) + model.mean_
+        result_data.reshape(1, -1)
         result_data = pre_process.inverse_transform(result_data)
+        result_data.reshape(-1)
 
         result_img = _graph_resize(result_data)
         graph_img = px.line(x=result_img[:, 0],
