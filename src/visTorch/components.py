@@ -162,7 +162,7 @@ def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
         print("Latent Space 2: ", result_data.shape)
         result_data = pre_process.inverse_transform(result_data)
         print("Latent Space 3: ", result_data.shape)
-        result_data.reshape(-1)
+        result_data = result_data.reshape(-1)
         print("Latent Space 4: ", result_data.shape)
 
         result_img = _graph_resize(result_data)
