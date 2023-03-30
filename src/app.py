@@ -52,9 +52,7 @@ def load_surfaces(datfile_path):
 
 n_component = 6
 
-# create relative paths
-dataset_dir = 'dataset/picked_uiuc'
-os.makedirs(dataset_dir, exist_ok=True)
+dataset_dir = os.path.join(os.getcwd(), 'dataset', 'picked_uiuc')
 
 # dataset
 print('====Loading dataset...====')
