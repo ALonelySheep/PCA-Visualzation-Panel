@@ -157,7 +157,8 @@ def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
         # print("Latent Space: ", [f"{i:.2f}" for i in latent_space])
         result_data = np.dot(latent_space, model.components_) + model.mean_
         print("Latent Space 1: ", result_data.shape)
-        result_data.reshape(1, -1)
+        result_data = result_data.reshape(1, -1)
+        # result_data.reshape(1, -1)
         print("Latent Space 2: ", result_data.shape)
         result_data = pre_process.inverse_transform(result_data)
         print("Latent Space 3: ", result_data.shape)
