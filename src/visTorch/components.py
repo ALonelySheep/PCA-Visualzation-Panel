@@ -154,11 +154,15 @@ def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
         [Input(component_id=prefix + 'latent-slider-' + str(slider_id), component_property='value')
          for slider_id in range(latent_size)])
     def predicted_output(*latent_space):
-        print("Latent Space: ", [f"{i:.2f}" for i in latent_space])
+        # print("Latent Space: ", [f"{i:.2f}" for i in latent_space])
         result_data = np.dot(latent_space, model.components_) + model.mean_
+        print("Latent Space 1: ", result_data.shape)
         result_data.reshape(1, -1)
+        print("Latent Space 2: ", result_data.shape)
         result_data = pre_process.inverse_transform(result_data)
+        print("Latent Space 3: ", result_data.shape)
         result_data.reshape(-1)
+        print("Latent Space 4: ", result_data.shape)
 
         result_img = _graph_resize(result_data)
         graph_img = px.line(x=result_img[:, 0],
