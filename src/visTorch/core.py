@@ -27,7 +27,6 @@ class VisBoard:
     
     def run_server(self, host=None, port=None, debug=True):
         """
-
         :param host: Address to host the app
         :param port: Port for app hosting
         :param debug:
@@ -36,6 +35,17 @@ class VisBoard:
         body = dbc.Container(self.body_children)
         self.app.layout = html.Div([self.navbar, body])
         self.app.run_server(host=host, port=port, debug=debug)
+
+    def prepare_server(self, host=None, port=None, debug=True):
+        """
+        :param host: Address to host the app
+        :param port: Port for app hosting
+        :param debug:
+        :return:
+        """
+        body = dbc.Container(self.body_children)
+        self.app.layout = html.Div([self.navbar, body])
+        # self.app.run_server(host=host, port=port, debug=debug)
 
 
     def add_pca(self, model, dataset, latent_options, pre_process=None):

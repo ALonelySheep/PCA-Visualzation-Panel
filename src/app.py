@@ -10,7 +10,7 @@ import os
 import argparse
 from pathlib import Path
 from visTorch import visboard
-
+import dash_bootstrap_components as dbc
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 
@@ -98,5 +98,7 @@ if __name__ == '__main__':
                         data_2d_scaled, 
                         latent_options={'n': pca_model.n_components_, 'min': -30, 'max': 30, 'step': 0.01},
                         pre_process=scaler)
-    server = vis_board.server
-    vis_board.run_server()
+    vis_board.prepare_server()
+    app = vis_board.app
+    server = app.server
+    app.run_server()
