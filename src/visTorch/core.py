@@ -25,7 +25,7 @@ class VisBoard:
         )
         return navbar
     
-    def run_server(self, host, port, debug=True):
+    def run_server(self, host=None, port=None, debug=True):
         """
 
         :param host: Address to host the app

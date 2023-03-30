@@ -13,6 +13,7 @@ from visTorch import visboard
 
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
+
 import re
 import numpy as np
 
@@ -51,16 +52,18 @@ def load_surfaces(datfile_path):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='PCA Visualization')
-    parser.add_argument('--visualize', action='store_true', default=False,
-                        help='Visualize / Interact with the latent Space (default: %(default)s)')
-    parser.add_argument('--n_component', type=int, default=2,
-                        help='num of principal components (default: %(default)s)')
-    parser.add_argument('--host', default='127.0.0.1',
-                        help='IP address for hosting the visualization app (default: %(default)s)')
-    parser.add_argument('--port', default='8051',
-                        help='hosting port (default: %(default)s)')
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(description='PCA Visualization')
+    # parser.add_argument('--visualize', action='store_true', default=False,
+    #                     help='Visualize / Interact with the latent Space (default: %(default)s)')
+    # parser.add_argument('--n_component', type=int, default=2,
+    #                     help='num of principal components (default: %(default)s)')
+    # parser.add_argument('--host', default='127.0.0.1',
+    #                     help='IP address for hosting the visualization app (default: %(default)s)')
+    # parser.add_argument('--port', default='8051',
+    #                     help='hosting port (default: %(default)s)')
+    # args = parser.parse_args()
+
+    n_component = 10
 
     # create relative paths
     # dataset_dir = os.path.join(os.getcwd(), 'PCA-dataset', 'picked_uiuc')
@@ -75,7 +78,8 @@ if __name__ == '__main__':
     data = np.array(data)
     print('====Dataset loaded.====')
 
-    pca_model = PCA(n_components=args.n_component, svd_solver='full')
+    # pca_model = PCA(n_components=args.n_component, svd_solver='full')
+    pca_model = PCA(n_components=n_component, svd_solver='full')
     
     # Preprocess data
     print('====Preprocessing data...====')
@@ -87,12 +91,21 @@ if __name__ == '__main__':
     print('====Preprocessing Done...====')
 
 
-    if args.visualize:
+    # if args.visualize:
         # initialize visualization app
-        vis_board = visboard()
-        vis_board.add_pca(pca_model, 
-                          data_2d_scaled, 
-                            latent_options={'n': pca_model.n_components_, 'min': -30, 'max': 30, 'step': 0.01},
-                          pre_process=scaler)
-        vis_board.run_server(args.host, args.port)
-        server = vis_board.server
+        # vis_board = visboard()
+        # vis_board.add_pca(pca_model, 
+        #                   data_2d_scaled, 
+        #                     latent_options={'n': pca_model.n_components_, 'min': -30, 'max': 30, 'step': 0.01},
+        #                   pre_process=scaler)
+        # vis_board.run_server(args.host, args.port)
+        # server = vis_board.server
+    
+    
+    vis_board = visboard()
+    vis_board.add_pca(pca_model, 
+                        data_2d_scaled, 
+                        latent_options={'n': pca_model.n_components_, 'min': -30, 'max': 30, 'step': 0.01},
+                        pre_process=scaler)
+    server = vis_board.server
+    vis_board.run_server()
