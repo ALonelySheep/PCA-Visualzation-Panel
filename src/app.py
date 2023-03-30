@@ -98,5 +98,5 @@ if __name__ == '__main__':
                         data_2d_scaled, 
                         latent_options={'n': pca_model.n_components_, 'min': -30, 'max': 30, 'step': 0.01},
                         pre_process=scaler)
-    vis_board.run_server(args.host, args.port)
     server = vis_board.server
+    vis_board.run_server()
