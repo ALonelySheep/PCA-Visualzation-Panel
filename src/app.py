@@ -95,4 +95,4 @@ if __name__ == '__main__':
                             latent_options={'n': pca_model.n_components_, 'min': -30, 'max': 30, 'step': 0.01},
                           pre_process=scaler)
         vis_board.run_server(args.host, args.port)
-        server = vis_board.app.server
+        server = vis_board.server

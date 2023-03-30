@@ -12,6 +12,7 @@ class VisBoard:
         """Creates and initializes a Plotly Dash App to which more visual components could be added"""
 
         self.app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
+        self.server = self.app.server
         self.app.config.suppress_callback_exceptions = True
         self.navbar = self.get_navbar(self.app)
         self.body_children = []
