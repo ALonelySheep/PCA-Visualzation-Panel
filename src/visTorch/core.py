@@ -20,7 +20,7 @@ class VisBoard:
     @staticmethod
     def get_navbar(app):
         navbar = dbc.NavbarSimple(
-            brand="VisTorch",
+            brand="Airfoil Design Demo",
             brand_href="#"
         )
         return navbar
