@@ -15,7 +15,7 @@ def _graph_resize(graph):
 def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
     prefix += '-pca-'
 
-    header = dbc.Row([html.Div(html.H5("PCA"), className="col-md-6")])
+    header = dbc.Row([html.Div(html.H5("Airfoil Parameter Design Visualization Demo"), className="col-md-6")])
 
     dataset_unscaled = pre_process.inverse_transform(dataset)
     data_pca = model.transform(dataset)
@@ -67,7 +67,7 @@ def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
                                                 "always_visible": False},
                                        className="mt-3 mb-3"))
         
-    latent_div = dbc.Col(dbc.Card([dbc.CardHeader("Transformed Space"),
+    latent_div = dbc.Col(dbc.Card([dbc.CardHeader("Parameters"),
                                    html.Span(id=prefix + "hidden-latent-space", children=init_hidden_space,
                                              className='d-none'),
                                    dbc.CardBody([html.Div(children=latent_space, id=prefix + 'output-latent')]), ]))
@@ -154,16 +154,16 @@ def pca(app, model, dataset, latent_options, pre_process=None, prefix=""):
         [Input(component_id=prefix + 'latent-slider-' + str(slider_id), component_property='value')
          for slider_id in range(latent_size)])
     def predicted_output(*latent_space):
-        # print("Latent Space: ", [f"{i:.2f}" for i in latent_space])
+        print("Latent Space: ", [f"{i:.2f}" for i in latent_space])
         result_data = np.dot(latent_space, model.components_) + model.mean_
-        print("Latent Space 1: ", result_data.shape)
+        # print("Latent Space 1: ", result_data.shape)
         result_data = result_data.reshape(1, -1)
         # result_data.reshape(1, -1)
-        print("Latent Space 2: ", result_data.shape)
+        # print("Latent Space 2: ", result_data.shape)
         result_data = pre_process.inverse_transform(result_data)
-        print("Latent Space 3: ", result_data.shape)
+        # print("Latent Space 3: ", result_data.shape)
         result_data = result_data.reshape(-1)
-        print("Latent Space 4: ", result_data.shape)
+        # print("Latent Space 4: ", result_data.shape)
 
         result_img = _graph_resize(result_data)
         graph_img = px.line(x=result_img[:, 0],
